@@ -1,8 +1,104 @@
 # This file is where the workouts will be selected and scaled
 
 # reads in the data
+import json
 import csv
-with open('Data.csv') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',', quotechar='|')
-    for row in reader:
-        print((row))
+
+# row 0 is the exercise name
+# row 1 is date of access
+# row 2 is modality
+# row 3 is cardio/strength
+# row 4 is impact
+# row 5 is anterior/posterior
+# row 6 is station number
+# row 7 is equipment
+
+data = []
+with open('Data_in.csv') as in_csv:
+    with open('data_out.csv', 'w') as out_csv:
+        writer = csv.writer(out_csv, delimiter=',', quotechar='|')
+        in_data = csv.reader(in_csv, delimiter=',', quotechar='|')
+
+        for i, row in enumerate(in_data):
+            obj = row[0].lower()
+            if "crunch" in obj:
+                row[2] = "abs"
+                row[3] = "strength"
+                row[4] = 0
+                row[5] = "anterior"
+            if "row" in obj:
+                row[2] = "upper pull"
+                row[3] = "strength"
+                row[4] = 0
+                row[5] = "posterior"
+            if "barbell" in obj:
+                row[6] = 4
+                row[7] = "barbell"
+                row[3] = "strength"
+            if "squat" in obj:
+                row[2] = "lower push"
+                if "front" in obj:
+                    row[5] = "anterior"
+                else:
+                    row[5] = "posterior"
+                if "jump" in obj:
+                    row[3] = "cardio"
+                else:
+                    row[3] = "strength"
+            if "lunge" in obj:
+                row[2] = "lower push"
+                if "jump" in obj:
+                    row[3] = "cardio"
+                else:
+                    row[3] = "strength"
+                row[5] = "posterior"
+            if "oh" in obj:
+                row[2] = "upper push"
+                row[3] = "strength"
+                row[5] = "anterior"
+            if "press" in obj:
+                row[2] = "upper push"
+                row[3] = "strength"
+                row[5] = "anterior"
+            if "jump" in obj:
+                row[4] = 1
+            if "suspension" in obj:
+                row[6] = 3
+                # put in cases for when its push/pull, upper/lower
+            if "db" in obj:
+                row[7] = "db"
+                row[6] = 1
+            if "boxing" in obj:
+                row[6] = 5
+                row[7] = "boxing gear"
+                row[3] = "cardio"
+            if "suspension" in obj:
+                row[6] = 3
+                row[7] = "suspension"
+            if "curl" in obj:
+                row[2] = "upper pull"
+                row[3] = "strength"
+                row[4] = 0
+                row[5] = "anterior"
+            if "press" in obj or 'push' in obj:
+                row[2] = "upper push"
+                row[3] = "strength"
+                row[5] = "anterior"
+            if "up" and "down" in obj:
+                row[2] = "cardio"
+                row[3] = "cardio"
+                row[4] = 1
+                row[5] = "anterior"
+            if "mb" in obj:
+                row[7] = "med ball"
+            if "band" in obj:
+                row[7] = "band"
+            # elif "Impact?" in obj:
+            #     pass
+            # else:
+            #     row[4] = 0
+            writer.writerow(row)
+            data.append(row)
+
+        # print(row)
+        # check how many cells are empty: use sum(not not x for x in a)
