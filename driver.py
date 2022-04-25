@@ -3,7 +3,7 @@
 # reads in the data
 import json
 import csv
-
+import random
 # row 0 is the exercise name
 # row 1 is date of access
 # row 2 is modality
@@ -18,6 +18,8 @@ with open('Data_in.csv') as in_csv:
     with open('data_out.csv', 'w') as out_csv:
         writer = csv.writer(out_csv, delimiter=',', quotechar='|')
         in_data = csv.reader(in_csv, delimiter=',', quotechar='|')
+        bw_stations = [1, 4, 5]
+        abs_stations = [4, "abs"]
 
         for i, row in enumerate(in_data):
             obj = row[0].lower()
@@ -31,10 +33,11 @@ with open('Data_in.csv') as in_csv:
                 row[3] = "strength"
                 row[4] = 0
                 row[5] = "posterior"
-            if "barbell" in obj:
+            if "barbell" in obj or "wp" in obj:
                 row[6] = 4
                 row[7] = "barbell"
                 row[3] = "strength"
+                row[4] = 0
             if "squat" in obj:
                 row[2] = "lower push"
                 if "front" in obj:
@@ -45,7 +48,7 @@ with open('Data_in.csv') as in_csv:
                     row[3] = "cardio"
                 else:
                     row[3] = "strength"
-            if "lunge" in obj:
+            if "lunge" in obj or "stepping" in obj:
                 row[2] = "lower push"
                 if "jump" in obj:
                     row[3] = "cardio"
@@ -60,14 +63,18 @@ with open('Data_in.csv') as in_csv:
                 row[2] = "upper push"
                 row[3] = "strength"
                 row[5] = "anterior"
-            if "jump" in obj:
+            if "jump" in obj or "hop" in obj or "skip" in obj:
                 row[4] = 1
-            if "suspension" in obj:
-                row[6] = 3
-                # put in cases for when its push/pull, upper/lower
+                row[3] = "cardio"
+                row[2] = "lower push"
             if "db" in obj:
                 row[7] = "db"
                 row[6] = 1
+                row[3] = "strength"
+            if "plank" in obj:
+                row[2] = "abs"
+                row[4] = 0
+                row[5] = "anterior"
             if "boxing" in obj:
                 row[6] = 5
                 row[7] = "boxing gear"
@@ -75,6 +82,7 @@ with open('Data_in.csv') as in_csv:
             if "suspension" in obj:
                 row[6] = 3
                 row[7] = "suspension"
+                row[4] = 0
             if "curl" in obj:
                 row[2] = "upper pull"
                 row[3] = "strength"
@@ -91,12 +99,23 @@ with open('Data_in.csv') as in_csv:
                 row[5] = "anterior"
             if "mb" in obj:
                 row[7] = "med ball"
+                row[6] = 2
             if "band" in obj:
                 row[7] = "band"
-            # elif "Impact?" in obj:
-            #     pass
-            # else:
-            #     row[4] = 0
+                row[6] = 4
+            if "stability ball" in obj:
+                row[7] = "stability ball"
+                row[6] = 1
+            if "v " in obj:
+                row[2] = "abs"
+                row[3] = "strength"
+                row[5] = "anterior"
+            if "hurdle" in obj:
+                row[7] = "hurdle"
+                row[6] = 5
+            if row[7] is "":
+                row[6] = random.choice(bw_stations)
+
             writer.writerow(row)
             data.append(row)
 
