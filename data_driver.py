@@ -13,16 +13,18 @@ import random
 # row 6 is station number
 # row 7 is equipment
 
-# how do i not overwrite the info for the equipment?  Like if i want to modify a cell but not delete the info how do I do that
+# how do i not overwrite the info for the equipment?  Like if i want to modify a cell but not delete the
+# info how do I do that (I want to seperate each equipment by comma to split it into a list later on in the driver)
+
 data = []
 with open('Data_in.csv') as in_csv:
     with open('data_out.csv', 'w') as out_csv:
         writer = csv.writer(out_csv, delimiter=',', quotechar='|')
-        in_data = csv.reader(in_csv, delimiter=',', quotechar='|')
+        reader = csv.reader(in_csv, delimiter=',', quotechar='|')
         bw_stations = [1, 4, 5]
         abs_stations = [4, "abs"]
 
-        for i, row in enumerate(in_data):
+        for i, row in enumerate(reader):
             obj = row[0].lower()
             if "step" in obj and "ing" not in obj:
                 row[6] = 2
@@ -71,6 +73,10 @@ with open('Data_in.csv') as in_csv:
                 row[4] = 1
                 row[3] = "cardio"
                 row[2] = "lower push"
+            elif i == 0:
+                pass
+            else:
+                row[4] = 0
             if "db" in obj:
                 row[7] = "db"
                 row[6] = 1
@@ -96,7 +102,7 @@ with open('Data_in.csv') as in_csv:
                 row[2] = "upper push"
                 row[3] = "strength"
                 row[5] = "anterior"
-            if "up" and "down" in obj:
+            if "up" in obj and "down" in obj:
                 row[2] = "cardio"
                 row[3] = "cardio"
                 row[4] = 1
@@ -117,13 +123,24 @@ with open('Data_in.csv') as in_csv:
             if "hurdle" in obj:
                 row[7] = "hurdle"
                 row[6] = 5
+            if "extension" in obj:
+                if "tricep" in obj or "oh" in obj:
+                    row[2] = "upper push"
+                else:
+                    row[2] = "lower push"
+                row[3] = "strength"
+                row[4] = 0
+                row[5] = "posterior"
             if row[7] is "":  # need to find a way where I can make sure things that are L and R are grouped together; maybe delete the right options and if it picks left than just tell them to make it alternating?
                 row[6] = random.choice(bw_stations)
+                row[7] = "BW"
             if row[2] is "abs":
                 row[6] = random.choice(abs_stations)
 
             writer.writerow(row)
             data.append(row)
+
+        # print(sum(not not x for x in data))
 
         # print(row)
         # check how many cells are empty: use sum(not not x for x in a)

@@ -18,9 +18,40 @@ with open('data_out.csv') as info:
     in_data = csv.reader(info, delimiter=',', quotechar='|')
     for row in in_data:
         data.append(row)
-
 random.shuffle(data)
 print(data)
+
+# creating the data structures required
+workout_attributes = {}
+one = []
+two = []
+three = []
+four = []
+five = []
+abs = []
+
+# going through each movement in the data list
+# row 0 is the exercise name
+# row 1 is date of access
+# row 2 is modality
+# row 3 is cardio/strength
+# row 4 is impact
+# row 5 is anterior/posterior
+# row 6 is station number
+# row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
+
+for row in data:
+    name = row[0]
+    date = row[1]
+    modality = row[2]
+    weight_or_cardio = row[3]
+    impact = row[4]
+    front_back = row[5]
+    station = row[6]
+    equipment = row[7]
+
+    select = False
+
 
 # Data structures:
 # 1. map to store overall workout attributes
