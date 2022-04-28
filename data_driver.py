@@ -63,7 +63,12 @@ with open('Data_in.csv') as in_csv:
                 row[3] = "strength"
                 row[4] = "low impact"
                 row[5] = "posterior"
-            if "barbell" in obj:
+            if "curl" in obj:
+                row[2] = "upper pull"
+                row[3] = "strength"
+                row[4] = "low impact"
+                row[5] = "anterior"
+            if "barbell" in obj or "bb" in obj:
                 row[6] = 4
                 append_to_cell(row, 7, "barbell")
                 row[3] = "strength"
@@ -123,16 +128,6 @@ with open('Data_in.csv') as in_csv:
                 row[6] = 3
                 append_to_cell(row, 7, "suspension")
                 row[4] = "low impact"
-            if "curl" in obj:
-                row[2] = "upper pull"
-                row[3] = "strength"
-                row[4] = "low impact"
-                row[5] = "anterior"
-            if "wall sit" in obj:
-                row[2] = "lower push"
-                row[3] = "strength"
-                row[4] = "low impact"
-                row[5] = "anterior"
             if "press" in obj or 'push' in obj:
                 row[2] = "upper push"
                 row[3] = "strength"
@@ -181,6 +176,11 @@ with open('Data_in.csv') as in_csv:
                 row[3] = "cardio"
                 row[4] = "low impact"
                 row[5] = "posterior"
+            if "wall sit" in obj:
+                row[2] = "lower push"
+                row[3] = "strength"
+                row[4] = "low impact"
+                row[5] = "anterior"
             if "chop" in obj:
                 row[5] = "anterior"
             if "step" in obj and "stepping" not in obj:
@@ -191,6 +191,9 @@ with open('Data_in.csv') as in_csv:
                     row[3] = "strength"
                     row[4] = "low impact"
                     row[5] = "posterior"
+            if "sandbell" in obj:
+                row[7] = "sandbell"
+                row[6] = 4
             if row[7] is "":  # need to find a way where I can make sure things that are L and R are grouped together; maybe delete the right options and if it picks left than just tell them to make it alternating?
                 row[6] = random.choice(bw_stations)
                 row[7] = "BW"

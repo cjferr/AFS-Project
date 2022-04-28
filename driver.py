@@ -8,6 +8,7 @@
 # Random variable with a probability of skipping rows?
 
 # reading in will come from the data_out.csv file, use the csv reader module to do this (look up functions to shuffle the list once its read in)
+from audioop import add
 import csv
 import random
 import math
@@ -17,39 +18,86 @@ import math
 
 def check_valid(row):
     for i in range(2, 8):
-        if row[i] is "":
+        if row[i] == "":
             return False
     return True
 
 
-def add_movement(one, workout_attributes, movement):
-    for i in range(2, 5):
+def add_movement(picked, workout_attributes, movement):
+    for i in range(2, 6):
         # print(movement[i])
         workout_attributes[movement[i]] += 1
-    one.append(movement[0])
+    picked.append(movement[0])
 
 
-def pick_station_one(options, one, workout_attributes):
-    while len(one) < 3:
-        for elt in options:
+def pick_first(options, picked, workout_attributes):
+    for elt in options:
+        if len(picked) > 0:
+            break
+        if elt[4] == 'high impact' and workout_attributes[elt[4]] > 3:
+            break
+        if workout_attributes[elt[2]] > 5:
+            break
+        if workout_attributes[elt[3]] > 9 and elt[3] == 'strength':
+            break
+        if workout_attributes[elt[5]] > 8 and elt[5] == 'anterior':
+            break
+        if "left" in elt and len(picked) > 0:
+            break
+        if "right" in elt and len(picked) > 0:
+            break
+        add_movement(picked, workout_attributes, elt)
+
+        return elt
+
+
+def pick_second(options, picked, workout_attributes, movement1):
+    # bug here: picking the same movement twice if left or right is in the name, but not picking the opposite side for it.
+    if "left" in movement1[0] or "right" in movement1[0]:
+        string = ""
+        if "left" in movement1[0]:
+            string = "left"
+        else:
+            string = "right"
+
+        text = movement1[0].replace(string, '')
+        for e2 in options:
+            if text in e2[0]:
+                add_movement(picked, workout_attributes, e2)
+                return
+
+    for elt in options:
+        if len(picked) > 1:
+            pass
+        elif movement1[2] == elt[2]:
+            pass
+        elif movement1[3] == 'cardio' and elt[3] == 'cardio':
+            pass
+        elif movement1[4] == 'high impact' and elt[4] == 'high impact':
+            pass
+        else:
             if elt[4] == 'high impact' and workout_attributes[elt[4]] > 3:
-                break
-            if workout_attributes[elt[2]] > 5:
-                break
-            if workout_attributes[elt[3]] > 9 and elt[3] == 'strength':
-                break
-            if workout_attributes[elt[5]] > 8 and elt[5] == 'anterior':
-                break
-            if "left" in elt and len(one) > 0:
-                break
-            add_movement(one, workout_attributes, elt)
+                pass
+            elif workout_attributes[elt[2]] > 5:
+                pass
+            elif workout_attributes[elt[3]] > 9 and elt[3] == 'strength':
+                pass
+            elif workout_attributes[elt[5]] > 8 and elt[5] == 'anterior':
+                pass
+            elif "left" in elt or "right" in elt:
+                pass
+            else:
+                add_movement(picked, workout_attributes, elt)
 
-            if "left" in elt:
-                text = elt.replace('left', '')
-                for e2 in options:
-                    if text in e2[0]:
-                        add_movement(one, workout_attributes, elt)
-    print(one)
+
+def pick_station(options, picked, workout_attributes):
+    movement1 = pick_first(options, picked, workout_attributes)
+    if len(picked) > 1:
+        print('error in picking movement 1')
+        return
+    pick_second(options, picked, workout_attributes, movement1)
+
+    # print(picked)
 
 
 # row 0 is the exercise name
@@ -74,17 +122,17 @@ with open('data_out.csv') as info:
     for row in in_data:
         if not check_valid(row):
             pass
-        elif row[6] is '1':
+        elif row[6] == '1':
             one_options.append(row)
-        elif row[6] is '2':
+        elif row[6] == '2':
             two_options.append(row)
-        elif row[6] is '3':
+        elif row[6] == '3':
             three_options.append(row)
-        elif row[6] is '4':
+        elif row[6] == '4':
             four_options.append(row)
-        elif row[6] is '5':
+        elif row[6] == '5':
             five_options.append(row)
-        elif row[6] is 'abs':
+        elif row[6] == 'abs':
             abs_options.append(row)
 
 random.shuffle(one_options)
@@ -108,10 +156,30 @@ with open('keywords.txt') as keywords:
         word = word.replace('\n', '')
         workout_attributes[word] = 0
 
-print(workout_attributes)
+pick_station(one_options, one, workout_attributes)
+pick_station(two_options, two, workout_attributes)
+pick_station(three_options, three, workout_attributes)
+pick_station(four_options, four, workout_attributes)
+pick_station(five_options, five, workout_attributes)
+pick_station(abs_options, abs, workout_attributes)
 
-print("\n\n testing function pick_station_one\n")
-pick_station_one(one_options, one, workout_attributes)
+# workout = []
+# workout += one + two + three + four + five + abs
+
+# print(workout)
+
+print('Here is your workout!\n\n')
+print(one)
+print('\n')
+print(two)
+print('\n')
+print(three)
+print('\n')
+print(four)
+print('\n')
+print(five)
+print('\n')
+print(abs)
 # going through each movement in the data list
 # row 0 is the exercise name
 # row 1 is date of access
