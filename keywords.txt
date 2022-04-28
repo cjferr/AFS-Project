@@ -1,0 +1,11 @@
+upper push
+upper pull
+lower push
+lower pull
+cardio
+abs
+strength
+anterior
+posterior
+high impact
+low impact

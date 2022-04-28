@@ -40,7 +40,7 @@ with open('Data_in.csv') as in_csv:
             if "run" in obj:
                 row[2] = "lower pull"
                 row[3] = "cardio"
-                row[4] = 1
+                row[4] = "high impact"
                 row[5] = "posterior"
                 if "step" in obj:
                     row[6] = 2
@@ -51,27 +51,27 @@ with open('Data_in.csv') as in_csv:
                 if "up" in obj:
                     row[2] = "lower push"
                     row[3] = "strength"
-                    row[4] = 0
+                    row[4] = "low impact"
                     row[5] = "posterior"
             if "crunch" in obj:
                 row[2] = "abs"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "anterior"
             if "row" in obj:
                 row[2] = "upper pull"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "posterior"
             if "barbell" in obj:
                 row[6] = 4
                 append_to_cell(row, 7, "barbell")
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
             if "wp" in obj:
                 append_to_cell(row, 7, "plate")
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
             if "squat" in obj:
                 row[2] = "lower push"
                 if "front" in obj:
@@ -98,20 +98,20 @@ with open('Data_in.csv') as in_csv:
                 row[3] = "strength"
                 row[5] = "anterior"
             if "jump" in obj or "hop" in obj or "skip" in obj:
-                row[4] = 1
+                row[4] = "high impact"
                 row[3] = "cardio"
                 row[2] = "lower push"
             elif i == 0:
                 pass
             else:
-                row[4] = 0
+                row[4] = "low impact"
             if "db" in obj:
                 append_to_cell(row, 7, "db")
                 row[6] = 1
                 row[3] = "strength"
             if "plank" in obj:
                 row[2] = "abs"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "anterior"
             if "boxing" in obj:
                 row[6] = 5
@@ -122,16 +122,16 @@ with open('Data_in.csv') as in_csv:
             if "suspension" in obj:
                 row[6] = 3
                 append_to_cell(row, 7, "suspension")
-                row[4] = 0
+                row[4] = "low impact"
             if "curl" in obj:
                 row[2] = "upper pull"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "anterior"
             if "wall sit" in obj:
                 row[2] = "lower push"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "anterior"
             if "press" in obj or 'push' in obj:
                 row[2] = "upper push"
@@ -140,7 +140,7 @@ with open('Data_in.csv') as in_csv:
             if "up" in obj and "down" in obj:
                 row[2] = "upper push"
                 row[3] = "cardio"
-                row[4] = 1
+                row[4] = "high impact"
                 row[5] = "anterior"
             if "mb" in obj:
                 append_to_cell(row, 7, "med ball")
@@ -154,7 +154,7 @@ with open('Data_in.csv') as in_csv:
             if "bridge" in obj:
                 row[2] = "lower push"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "posterior"
             if "v " in obj:
                 row[2] = "abs"
@@ -169,7 +169,7 @@ with open('Data_in.csv') as in_csv:
                 else:
                     row[2] = "lower push"
                 row[3] = "strength"
-                row[4] = 0
+                row[4] = "low impact"
                 row[5] = "posterior"
             if "versa" in obj:
                 append_to_cell(row, 7, "versabag")
@@ -179,7 +179,7 @@ with open('Data_in.csv') as in_csv:
                 append_to_cell(row, 7, "ladder")
                 row[2] = "lower push"
                 row[3] = "cardio"
-                row[4] = 1
+                row[4] = "low impact"
                 row[5] = "posterior"
             if "chop" in obj:
                 row[5] = "anterior"
@@ -189,7 +189,7 @@ with open('Data_in.csv') as in_csv:
                 if "up" in obj:
                     row[2] = "lower push"
                     row[3] = "strength"
-                    row[4] = 0
+                    row[4] = "low impact"
                     row[5] = "posterior"
             if row[7] is "":  # need to find a way where I can make sure things that are L and R are grouped together; maybe delete the right options and if it picks left than just tell them to make it alternating?
                 row[6] = random.choice(bw_stations)
