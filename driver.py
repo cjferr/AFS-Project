@@ -12,6 +12,20 @@ import csv
 import random
 import math
 
+# Function to check that the row is completely filled out
+
+
+def check_valid(row):
+    for i in range(8):
+        if row[i] is "":
+            return False
+    return True
+
+
+def fill_station(station, options, workout_attributes):
+    pass
+
+
 # reading in the data and randomizing it
 data = []
 with open('data_out.csv') as info:
@@ -33,19 +47,17 @@ abs = []
 # going through each movement in the data list
 # row 0 is the exercise name
 # row 1 is date of access
-# row 2 is modality
-# row 3 is cardio/strength
-# row 4 is impact
-# row 5 is anterior/posterior
-# row 6 is station number
+# row 2 is modality (we want no more than 4 of any one modality, and at least 1 of each)
+# row 3 is cardio/strength (we want at least 3 cardio movements)
+# row 4 is impact (no more than 3 impact movements)
+# row 5 is anterior/posterior (at least 4 posterior movements)
+# row 6 is station number (2 per)
 # row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
-
+count = 0
 for row in data:
-    for i in range(8):
-        if row[i] == "":
-            print('moving on bc theres something not filled in')
-            break
     # if we get to here that means the movement must have all parameters filled in
+    if not check_valid(row):
+        pass
     name = row[0]
     date = row[1]
     modality = row[2]
@@ -53,7 +65,12 @@ for row in data:
     impact = row[4]
     front_back = row[5]
     station = row[6]
-    equipment = row[7]
+    equipment = str(row[7])
+    if row[8] is not "":
+        equipment += "," + row[8]
+        equipment = equipment.split(',')
+
+    # things we want to choose by: modality, station number,
 
     select = False
 
@@ -63,7 +80,7 @@ for row in data:
         pass
         # implement choosing the movement for the exercise here
 
-
+print(count)
 # Data structures:
 # 1. map to store overall workout attributes
 # 2. list for each station for the 2 movements that will be there
