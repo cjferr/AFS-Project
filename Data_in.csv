@@ -1,6 +1,6 @@
-﻿Exercise Name,Day last selected,Modality,Cardio or Strength,Impact?,Anterior/Posterior,Station Number,Equipment,,KEY
-Alternating Single Leg 1/2 Up/Down,4/22/22,Lower Push,Strength,0,Anterior,3,None,,"Modality: can be upper push, upper pull, lower push, lower pull, or abs"
-1 db single leg wall sit with curl and OH press on left foot,4/22/22,Lower Push,Strength,0,Anterior,2,DB,,"Cardio or Strength, as it says"
+﻿Exercise Name,Day last selected,Modality,Cardio or Strength,Impact?,Anterior/Posterior,Station Number,Equipment,Equipment,KEY
+Alternating Single Leg 1/2 Up/Down,,,,,,,,,"Modality: can be upper push, upper pull, lower push, lower pull, or abs"
+1 db single leg wall sit with curl and OH press on left foot,,,,,,,,,"Cardio or Strength, as it says"
 1 db single leg wall sit with curl and OH press on right foot,,,,,,,,,"Impact: 1 means high impact, 0 means low impact"
 180 jump turn,,,,,,,,,"Anterior/posterior, as it says, which chain are we targeting"
 3 way lunge left,,,,,,,,,Station number is ints

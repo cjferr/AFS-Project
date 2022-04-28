@@ -19,7 +19,7 @@ with open('data_out.csv') as info:
     for row in in_data:
         data.append(row)
 random.shuffle(data)
-print(data)
+# print(data)
 
 # creating the data structures required
 workout_attributes = {}
@@ -41,6 +41,11 @@ abs = []
 # row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
 
 for row in data:
+    for i in range(8):
+        if row[i] == "":
+            print('moving on bc theres something not filled in')
+            break
+    # if we get to here that means the movement must have all parameters filled in
     name = row[0]
     date = row[1]
     modality = row[2]
@@ -51,6 +56,12 @@ for row in data:
     equipment = row[7]
 
     select = False
+
+    # implement deciding if we want to make select true here
+
+    if select:
+        pass
+        # implement choosing the movement for the exercise here
 
 
 # Data structures:
