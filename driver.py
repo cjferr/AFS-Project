@@ -8,10 +8,8 @@
 # Random variable with a probability of skipping rows?
 
 # reading in will come from the data_out.csv file, use the csv reader module to do this (look up functions to shuffle the list once its read in)
-from audioop import add
 import csv
 import random
-import math
 
 # Function to check that the row is completely filled out
 
@@ -161,7 +159,25 @@ pick_station(two_options, two, workout_attributes)
 pick_station(three_options, three, workout_attributes)
 pick_station(four_options, four, workout_attributes)
 pick_station(five_options, five, workout_attributes)
-pick_station(abs_options, abs, workout_attributes)
+
+# picking abs exercises
+for elt in abs_options:
+    if len(abs) > 1:
+        break
+    if ("left" in elt[0] or "right" in elt[0]) and len(abs) < 1:
+        string = ""
+        if "left" in elt[0]:
+            string = "left"
+        else:
+            string = "right"
+
+        text = elt[0].replace(string, '')
+        for e2 in abs_options:
+            if text in e2[0]:
+                add_movement(abs, workout_attributes, e2)
+    else:
+        add_movement(abs, workout_attributes, elt)
+
 
 # workout = []
 # workout += one + two + three + four + five + abs
