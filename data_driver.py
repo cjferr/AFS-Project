@@ -53,6 +53,14 @@ with open('Data_in.csv') as in_csv:
                     row[3] = "strength"
                     row[4] = "low impact"
                     row[5] = "posterior"
+            if "press" in obj:
+                row[2] = "upper push"
+                row[3] = "strength"
+                row[5] = "anterior"
+            if "oh" in obj:
+                row[2] = "upper push"
+                row[3] = "strength"
+                row[5] = "anterior"
             if "crunch" in obj:
                 row[2] = "abs"
                 row[3] = "strength"
@@ -94,14 +102,6 @@ with open('Data_in.csv') as in_csv:
                 else:
                     row[3] = "strength"
                 row[5] = "posterior"
-            if "oh" in obj:
-                row[2] = "upper push"
-                row[3] = "strength"
-                row[5] = "anterior"
-            if "press" in obj:
-                row[2] = "upper push"
-                row[3] = "strength"
-                row[5] = "anterior"
             if "jump" in obj or "hop" in obj or "skip" in obj:
                 row[4] = "high impact"
                 row[3] = "cardio"
@@ -124,7 +124,7 @@ with open('Data_in.csv') as in_csv:
                 row[3] = "cardio"
                 row[2] = "upper push"
                 row[5] = "anterior"
-            if "suspension" in obj:
+            if "suspension" in obj or "strap" in obj:
                 row[6] = 3
                 append_to_cell(row, 7, "suspension")
                 row[4] = "low impact"

@@ -14,6 +14,11 @@ import random
 # Function to check that the row is completely filled out
 
 
+def print_list(list):
+    for elt in list:
+        print(elt[0])
+
+
 def check_valid(row):
     for i in range(2, 8):
         if row[i] == "":
@@ -66,7 +71,7 @@ def pick_second(options, picked, workout_attributes, movement1):
 
     for elt in options:
         if len(picked) > 1:
-            pass
+            return
         elif movement1[2] == elt[2]:
             pass
         elif movement1[3] == 'cardio' and elt[3] == 'cardio':
@@ -99,9 +104,9 @@ def pick_station_B(options, picked, workout_attributes):
 
 
 def scale_A(options, movement):
-    pick = True
 
     for elt in options:
+        pick = True
         if elt[0] == movement[0]:
             pass
         elif "left" in elt[0] and "left" not in movement[0]:
@@ -113,30 +118,49 @@ def scale_A(options, movement):
         elif "right" not in elt[0] and "right" in movement[0]:
             pass
         else:
-            for i in range(2, 6):
-                if elt[i] != movement[i]:
-                    pick = False
+            if elt[2] != movement[2]:
+                pick = False
             # this if statement is never becoming true
             if pick:
-                print('adding movement A')
+                # print('adding movement A')
                 return elt
 
 
-def scale_C(options, picked):
-    pass
+def scale_C(options, movement, scale_a_first):
+
+    for elt in options:
+        pick = True
+        if elt == movement or elt == scale_a_first:
+            pass
+        elif "left" in elt[0] and "left" not in movement[0]:
+            pass
+        elif "right" in elt[0] and "right" not in movement[0]:
+            pass
+        elif "left" not in elt[0] and "left" in movement[0]:
+            pass
+        elif "right" not in elt[0] and "right" in movement[0]:
+            pass
+        else:
+            if elt[2] != movement[2] or elt[4] == 'high impact':
+                pick = False
+            # this if statement is never becoming true
+            if pick:
+                # print('adding movement C')
+                return elt
 
 
 def scale(options, picked):
     new_list = []
     scale_a_first = scale_A(options, picked[0])
-    print(scale_a_first[0])
-    print(picked[0])
-    # scale_c_first = scale_C(options, picked[0])
-    # scale_a_second = scale_A(options, picked[1])
-    # scale_c_second = scale_C(options, picked[1])
+    scale_c_first = scale_C(options, picked[0], scale_a_first)
+    scale_a_second = scale_A(options, picked[1])
+    scale_c_second = scale_C(options, picked[1], scale_a_second)
 
     # append the options to the new list in the right order
-    # new_list += scale_a_first + picked[0] + scale_c_first + scale_a_second + picked[1] + scale_c_second
+    new_list += scale_a_first[0] + picked[0][0] + scale_c_first[0] + \
+        scale_a_second[0] + picked[1][0] + scale_c_second[0]
+    picked = new_list
+    print(picked)
 
 
 # row 0 is the exercise name
