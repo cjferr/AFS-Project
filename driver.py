@@ -25,7 +25,7 @@ def add_movement(picked, workout_attributes, movement):
     for i in range(2, 6):
         # print(movement[i])
         workout_attributes[movement[i]] += 1
-    picked.append(movement[0])
+    picked.append(movement)
 
 
 def pick_first(options, picked, workout_attributes):
@@ -88,7 +88,7 @@ def pick_second(options, picked, workout_attributes, movement1):
                 add_movement(picked, workout_attributes, elt)
 
 
-def pick_station(options, picked, workout_attributes):
+def pick_station_B(options, picked, workout_attributes):
     movement1 = pick_first(options, picked, workout_attributes)
     if len(picked) > 1:
         print('error in picking movement 1')
@@ -96,6 +96,47 @@ def pick_station(options, picked, workout_attributes):
     pick_second(options, picked, workout_attributes, movement1)
 
     # print(picked)
+
+
+def scale_A(options, movement):
+    pick = True
+
+    for elt in options:
+        if elt[0] == movement[0]:
+            pass
+        elif "left" in elt[0] and "left" not in movement[0]:
+            pass
+        elif "right" in elt[0] and "right" not in movement[0]:
+            pass
+        elif "left" not in elt[0] and "left" in movement[0]:
+            pass
+        elif "right" not in elt[0] and "right" in movement[0]:
+            pass
+        else:
+            for i in range(2, 6):
+                if elt[i] != movement[i]:
+                    pick = False
+            # this if statement is never becoming true
+            if pick:
+                print('adding movement A')
+                return elt
+
+
+def scale_C(options, picked):
+    pass
+
+
+def scale(options, picked):
+    new_list = []
+    scale_a_first = scale_A(options, picked[0])
+    print(scale_a_first[0])
+    print(picked[0])
+    # scale_c_first = scale_C(options, picked[0])
+    # scale_a_second = scale_A(options, picked[1])
+    # scale_c_second = scale_C(options, picked[1])
+
+    # append the options to the new list in the right order
+    # new_list += scale_a_first + picked[0] + scale_c_first + scale_a_second + picked[1] + scale_c_second
 
 
 # row 0 is the exercise name
@@ -106,7 +147,6 @@ def pick_station(options, picked, workout_attributes):
 # row 5 is anterior/posterior (at least 4 posterior movements)
 # row 6 is station number (2 per)
 # row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
-
 # reading in the data and randomizing it
 one_options = []
 two_options = []
@@ -140,6 +180,7 @@ random.shuffle(four_options)
 random.shuffle(five_options)
 random.shuffle(abs_options)
 # creating the data structures required
+# order of the list will be 1A, 1B, 1C, 2A, 2B, 2C
 workout_attributes = {}
 one = []
 two = []
@@ -154,11 +195,11 @@ with open('keywords.txt') as keywords:
         word = word.replace('\n', '')
         workout_attributes[word] = 0
 
-pick_station(one_options, one, workout_attributes)
-pick_station(two_options, two, workout_attributes)
-pick_station(three_options, three, workout_attributes)
-pick_station(four_options, four, workout_attributes)
-pick_station(five_options, five, workout_attributes)
+pick_station_B(one_options, one, workout_attributes)
+pick_station_B(two_options, two, workout_attributes)
+pick_station_B(three_options, three, workout_attributes)
+pick_station_B(four_options, four, workout_attributes)
+pick_station_B(five_options, five, workout_attributes)
 
 # picking abs exercises
 for elt in abs_options:
@@ -178,24 +219,34 @@ for elt in abs_options:
     else:
         add_movement(abs, workout_attributes, elt)
 
+# SCALING
+scale(one_options, one)
+# scale_A
+# scale_A
+# scale_A
+# scale_A
+# scale_A
 
 # workout = []
 # workout += one + two + three + four + five + abs
 
 # print(workout)
 
-print('Here is your workout!\n\n')
-print(one)
-print('\n')
-print(two)
-print('\n')
-print(three)
-print('\n')
-print(four)
-print('\n')
-print(five)
-print('\n')
-print(abs)
+# print('Here is your workout!\n\n')
+# print(one)
+# print('\n')
+# print(two)
+# print('\n')
+# print(three)
+# print('\n')
+# print(four)
+# print('\n')
+# print(five)
+# print('\n')
+# print(abs)
+
+# have to still pick scaling options
+
 # going through each movement in the data list
 # row 0 is the exercise name
 # row 1 is date of access
