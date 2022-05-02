@@ -1,21 +1,36 @@
-None
-['db alt bent over row 1 arm hold torso', '', 'upper pull', 'strength', 'low impact', 'posterior', '1', 'db', '', '']
-Here is your workout!
-
-
-[['db alt bent over row 1 arm hold torso', '', 'upper pull', 'strength', 'low impact', 'posterior', '1', 'db', '', ''], ['DB Single Arm OH Tricep Extension', '', 'upper push', 'strength', 'low impact', 'posterior', '1', 'db', '', '']]
-
-
-[['step versa bag squat linear step up squat', '', 'lower push', 'strength', 'low impact', 'posterior', '2', 'steps', 'versabag', ''], ['step mb lateral squat with oh press with right', '', 'upper push', 'strength', 'low impact', 'anterior', '2', 'steps', 'med ball', '']]
-
-
-[['suspension hack squat with high row', '', 'lower push', 'strength', 'low impact', 'posterior', '3', 'suspension', '', ''], ['suspension low row', '', 'upper pull', 'strength', 'low impact', 'posterior', '3', 'suspension', '', '']]
-
-
-[['BB Curl', '', 'upper pull', 'strength', 'low impact', 'anterior', '4', 'barbell', '', ''], ['band high sumo squat hold with supinated row', '', 'lower push', 'strength', 'low impact', 'posterior', '4', 'band', '', '']]
-
-
-[['Reverse Lunge to Squat', '', 'lower push', 'strength', 'low impact', 'posterior', '5', 'BW', '', ''], ['boxing squat hold with bilateral left right', '', 'upper push', 'cardio', 'low impact', 'anterior', '5', 'boxing gear', '', '']]
-
-
-[['SB Straight Arm Crunch', '', 'abs', 'strength', 'low impact', 'anterior', 'abs', 'BW', '', ''], ['db v sit hold with partial rep bicep curl', '', 'abs', 'strength', 'low impact', 'anterior', 'abs', 'db', '', '']]
+db reverse lunge with oh press left
+db stationary lunge with oh press left
+DB 1-db squat w 1 arm oh press left
+db reverse lunge with oh press left
+db stationary lunge with oh press left
+DB 1-db squat w 1 arm oh press left
+step single leg linear step up with hip flexion right
+mb diagonal chop right
+step lateral step up with abduction right
+step single leg linear step up with hip flexion right
+mb diagonal chop right
+step lateral step up with abduction right
+suspension squat hold with partial rep high row
+suspension squat hold with partial rep low row
+suspension squat hold with high row
+suspension bicep curl crunch
+suspension leg curl
+suspension high row hold at 90 degrees
+BB Bridge
+Squat jump-hh lateral hop-squat jump
+band mid sumo squat hold with supinated row
+band mid band low row high row combo
+band high supinated speed row
+band high supinated row
+Squat High Hurdle Lateral Hop Squat
+Lateral Skip with Squat
+Reverse Lunge to Squat
+Boxing Squat Hold with L Cross
+sphinx push ups
+Boxing LR Elbows
+straight leg crunch hold reaching for toes
+db 12-15 upper body crunch
+DB Bear Plank with Alternating Row
+db 12-15 upper body crunch
+straight leg crunch hold reaching for toes
+DB Bear Plank with Alternating Row

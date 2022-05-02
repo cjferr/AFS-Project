@@ -95,9 +95,6 @@ def pick_second(options, picked, workout_attributes, movement1):
 
 def pick_station_B(options, picked, workout_attributes):
     movement1 = pick_first(options, picked, workout_attributes)
-    if len(picked) > 1:
-        print('error in picking movement 1')
-        return
     pick_second(options, picked, workout_attributes, movement1)
 
     # print(picked)
@@ -156,11 +153,22 @@ def scale(options, picked):
     scale_a_second = scale_A(options, picked[1])
     scale_c_second = scale_C(options, picked[1], scale_a_second)
 
+    # options.remove(scale_a_first)
+    # options.remove(scale_c_first)
+    # options.remove(scale_a_second)
+    # options.remove(scale_c_second)
+
+    new_list.append(scale_a_first[0])
+    new_list.append(picked[0][0])
+    new_list.append(scale_c_first[0])
+    new_list.append(scale_a_second[0])
+    new_list.append(picked[1][0])
+    new_list.append(scale_c_second[0])
     # append the options to the new list in the right order
-    new_list += scale_a_first[0] + picked[0][0] + scale_c_first[0] + \
-        scale_a_second[0] + picked[1][0] + scale_c_second[0]
+    # new_list += scale_a_first[0] + picked[0][0] + scale_c_first[0] + \
+    #     scale_a_second[0] + picked[1][0] + scale_c_second[0]
     picked = new_list
-    print(picked)
+    return picked
 
 
 # row 0 is the exercise name
@@ -244,17 +252,19 @@ for elt in abs_options:
         add_movement(abs, workout_attributes, elt)
 
 # SCALING
-scale(one_options, one)
-# scale_A
-# scale_A
-# scale_A
-# scale_A
-# scale_A
+one = scale(one_options, one)
+two = scale(two_options, two)
+three = scale(three_options, three)
+four = scale(four_options, four)
+five = scale(five_options, five)
+abs = scale(abs_options, abs)
 
-# workout = []
-# workout += one + two + three + four + five + abs
+workout = []
+workout += one + two + three + four + five + abs
 
-# print(workout)
+for elt in workout:
+    print(elt)
+# order of the workout is A/B/C for station 1 exercise 1, then exercise 2, then station 2, etc. all the way around the gym
 
 # print('Here is your workout!\n\n')
 # print(one)
