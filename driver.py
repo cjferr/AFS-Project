@@ -9,6 +9,7 @@
 
 # reading in will come from the data_out.csv file, use the csv reader module to do this (look up functions to shuffle the list once its read in)
 import csv
+from datetime import date
 import random
 
 # Function to check that the row is completely filled out
@@ -264,6 +265,16 @@ workout += one + two + three + four + five + abs
 
 for elt in workout:
     print(elt)
+
+# with open('data_out.csv', 'w') as out_data:
+#     with open('data_out.csv') as in_data:
+#         write = csv.writer(out_data, delimiter=',', quotechar='|')
+#         read = csv.reader(in_data, delimiter=',', quotechar='|')
+#         for elt in read:
+#             if elt[0] in workout:
+#                 elt[1] = date
+#         write.writerow(elt)
+
 # order of the workout is A/B/C for station 1 exercise 1, then exercise 2, then station 2, etc. all the way around the gym
 
 # print('Here is your workout!\n\n')
