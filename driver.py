@@ -181,90 +181,92 @@ def scale(options, picked):
 # row 6 is station number (2 per)
 # row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
 # reading in the data and randomizing it
-one_options = []
-two_options = []
-three_options = []
-four_options = []
-five_options = []
-abs_options = []
+def func():
+    one_options = []
+    two_options = []
+    three_options = []
+    four_options = []
+    five_options = []
+    abs_options = []
 
-with open('data_out.csv') as info:
-    in_data = csv.reader(info, delimiter=',', quotechar='|')
-    for row in in_data:
-        if not check_valid(row):
-            pass
-        elif row[6] == '1':
-            one_options.append(row)
-        elif row[6] == '2':
-            two_options.append(row)
-        elif row[6] == '3':
-            three_options.append(row)
-        elif row[6] == '4':
-            four_options.append(row)
-        elif row[6] == '5':
-            five_options.append(row)
-        elif row[6] == 'abs':
-            abs_options.append(row)
+    with open('data_out.csv') as info:
+        in_data = csv.reader(info, delimiter=',', quotechar='|')
+        for row in in_data:
+            if not check_valid(row):
+                pass
+            elif row[6] == '1':
+                one_options.append(row)
+            elif row[6] == '2':
+                two_options.append(row)
+            elif row[6] == '3':
+                three_options.append(row)
+            elif row[6] == '4':
+                four_options.append(row)
+            elif row[6] == '5':
+                five_options.append(row)
+            elif row[6] == 'abs':
+                abs_options.append(row)
 
-random.shuffle(one_options)
-random.shuffle(two_options)
-random.shuffle(three_options)
-random.shuffle(four_options)
-random.shuffle(five_options)
-random.shuffle(abs_options)
-# creating the data structures required
-# order of the list will be 1A, 1B, 1C, 2A, 2B, 2C
-workout_attributes = {}
-one = []
-two = []
-three = []
-four = []
-five = []
-abs = []
+    random.shuffle(one_options)
+    random.shuffle(two_options)
+    random.shuffle(three_options)
+    random.shuffle(four_options)
+    random.shuffle(five_options)
+    random.shuffle(abs_options)
+    # creating the data structures required
+    # order of the list will be 1A, 1B, 1C, 2A, 2B, 2C
+    workout_attributes = {}
+    one = []
+    two = []
+    three = []
+    four = []
+    five = []
+    abs = []
 
-# init map with the key words from the dataset
-with open('keywords.txt') as keywords:
-    for word in keywords:
-        word = word.replace('\n', '')
-        workout_attributes[word] = 0
+    # init map with the key words from the dataset
+    with open('keywords.txt') as keywords:
+        for word in keywords:
+            word = word.replace('\n', '')
+            workout_attributes[word] = 0
 
-pick_station_B(one_options, one, workout_attributes)
-pick_station_B(two_options, two, workout_attributes)
-pick_station_B(three_options, three, workout_attributes)
-pick_station_B(four_options, four, workout_attributes)
-pick_station_B(five_options, five, workout_attributes)
+    pick_station_B(one_options, one, workout_attributes)
+    pick_station_B(two_options, two, workout_attributes)
+    pick_station_B(three_options, three, workout_attributes)
+    pick_station_B(four_options, four, workout_attributes)
+    pick_station_B(five_options, five, workout_attributes)
 
-# picking abs exercises
-for elt in abs_options:
-    if len(abs) > 1:
-        break
-    if ("left" in elt[0] or "right" in elt[0]) and len(abs) < 1:
-        string = ""
-        if "left" in elt[0]:
-            string = "left"
+    # picking abs exercises
+    for elt in abs_options:
+        if len(abs) > 1:
+            break
+        if ("left" in elt[0] or "right" in elt[0]) and len(abs) < 1:
+            string = ""
+            if "left" in elt[0]:
+                string = "left"
+            else:
+                string = "right"
+
+            text = elt[0].replace(string, '')
+            for e2 in abs_options:
+                if text in e2[0]:
+                    add_movement(abs, workout_attributes, e2)
         else:
-            string = "right"
+            add_movement(abs, workout_attributes, elt)
 
-        text = elt[0].replace(string, '')
-        for e2 in abs_options:
-            if text in e2[0]:
-                add_movement(abs, workout_attributes, e2)
-    else:
-        add_movement(abs, workout_attributes, elt)
+    # SCALING
+    one = scale(one_options, one)
+    two = scale(two_options, two)
+    three = scale(three_options, three)
+    four = scale(four_options, four)
+    five = scale(five_options, five)
+    abs = scale(abs_options, abs)
 
-# SCALING
-one = scale(one_options, one)
-two = scale(two_options, two)
-three = scale(three_options, three)
-four = scale(four_options, four)
-five = scale(five_options, five)
-abs = scale(abs_options, abs)
+    workout = []
+    workout += one + two + three + four + five + abs
+    return workout
 
-workout = []
-workout += one + two + three + four + five + abs
-
-for elt in workout:
-    print(elt)
+    # for elt in workout:
+    #     print(elt)
 
 # with open('data_out.csv', 'w') as out_data:
 #     with open('data_out.csv') as in_data:
