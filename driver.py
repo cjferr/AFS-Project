@@ -181,7 +181,7 @@ def scale(options, picked):
 # row 6 is station number (2 per)
 # row 7 is equipment (I want this to be a list of everything in the cell seperated by commas)
 # reading in the data and randomizing it
-def func():
+def get_workouts():
     one_options = []
     two_options = []
     three_options = []
@@ -254,16 +254,24 @@ def func():
             add_movement(abs, workout_attributes, elt)
 
     # SCALING
-    one = scale(one_options, one)
-    two = scale(two_options, two)
-    three = scale(three_options, three)
-    four = scale(four_options, four)
-    five = scale(five_options, five)
-    abs = scale(abs_options, abs)
-
-    workout = []
-    workout += one + two + three + four + five + abs
-    return workout
+    # one = scale(one_options, one)
+    # two = scale(two_options, two)
+    # three = scale(three_options, three)
+    # four = scale(four_options, four)
+    # five = scale(five_options, five)
+    # abs = scale(abs_options, abs)
+    # workout = []
+    # workout += one + two + three + four + five + abs
+    return [{"name": "station_1", "label": "Station 1", "movements": scale(one_options, one)},
+            {"name": "station_2", "label": "Station 2",
+                "movements": scale(two_options, two)},
+            {"name": "station_3", "label": "Station 3",
+                "movements": scale(three_options, three)},
+            {"name": "station_4", "label": "Station 4",
+                "movements": scale(four_options, four)},
+            {"name": "station_5", "label": "Station 5",
+                "movements": scale(five_options, five)},
+            {"name": "station_abs", "label": "Abs Station", "movements": scale(abs_options, abs)}]
 
     # for elt in workout:
     #     print(elt)
