@@ -21,6 +21,7 @@
         <li class="center">Exercise 1A</li>
         <li>Exercise 1B</li>
         <li>Exercise 1C</li>
+        <!-- <br> -->
         <li>Exercise 2A</li>
         <li>Exercise 2B</li>
         <li>Exercise 2C</li>
@@ -41,6 +42,9 @@
     <ul>
         {% for movement in workout.movements %}
         <li>{{movement}}</li>
+        <!-- {% if loop.index % 3 == 0 %}
+            <br>
+        {% endif %} -->
         {% endfor %}
     </ul>
     <br>
