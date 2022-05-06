@@ -35,7 +35,7 @@
     <div class="row">
     {% for workout in workouts %}
     
-    <div class="column col-12 col-sm-12 col-md-4 col-lg-2">
+    <div class="column col-12 col-sm-12 col-md-4">
     
     <h5>{{workout.label}}</h5>
     <ul>
@@ -44,22 +44,14 @@
         {% endfor %}
     </ul>
     <br>
-
-</div>
+    </div>
 
     {% endfor %}
     </div>
 
-
-        
-
+    <!-- <div id="client-side-rendered-workouts"></div> -->
 </div>
 
-<script>
-    const generateBtn = document.getElementById('btn-generate');
-    generateBtn.onclick = function () {
-        window.location = "/workouts"
-    }
-</script>
+<script src="/static/js/index.js"></script>
 </body>
 </html>

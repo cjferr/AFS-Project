@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import driver
 
 app = Flask(__name__)
@@ -10,17 +10,27 @@ app = Flask(__name__)
 def index():
     return render_template('index.html', workouts=[])
 
+# pure API endpoint
+# input: nothing
+# output: a JSON list of workouts
 
-@app.route("/workouts")
-def show_workouts():
+
+def workouts_list():
     while True:
         try:
-            workouts = driver.get_workouts()
-            print(len(workouts))
-            print(workouts)
-            print("\n\n\n\n\n\n\n\n\n\n")
-            break
+            return driver.get_workouts()
         except:
-            return show_workouts()
+            return workouts_list()
 
-    return render_template('index.html', workouts=workouts)
+
+# client-side rendering (pure API endpoint / returns JSON)
+@app.route("/generate-workouts")
+def workouts_JSON():
+    return jsonify(workouts_JSON())
+
+# server-side rendering (returns an HTML page)
+
+
+@app.route("/show-workouts", methods=["GET"])
+def show_workouts():
+    return render_template('index.html', workouts=workouts_list())
