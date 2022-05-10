@@ -8,7 +8,11 @@ app = Flask(__name__)
 # todo: return each of the stations individually, and then print them.  Also need to figure out how we're going to make it run on the button click
 @app.route("/")
 def index():
-    return render_template('index.html', workouts=[])
+    # render_template creates a string out of the html file and variables passed in 
+    html_str = render_template('index.html', workouts=[])
+    print(html_str)
+    return html_str
+
 
 # pure API endpoint
 # input: nothing

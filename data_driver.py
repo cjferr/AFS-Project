@@ -30,8 +30,8 @@ def append_to_cell(row, index, text):
 data = []
 
 
-def fill_cell(row, col_idx, content):
-    if not row[col_idx]:
+def fill_cell(row, col_idx, content, overwrite=False):
+    if overwrite or not row[col_idx]:
         row[col_idx] = content
 
 
@@ -206,7 +206,7 @@ with open('Data_in.csv') as in_csv:
                 fill_cell(row, 6, random.choice(bw_stations))
                 fill_cell(row, 7, "BW")
             if row[2] == "abs":
-                fill_cell(row, 6, random.choice(abs_stations))
+                fill_cell(row, 6, random.choice(abs_stations), overwrite=True)
 
             writer.writerow(row)
             data.append(row)

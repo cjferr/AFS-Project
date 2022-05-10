@@ -102,7 +102,6 @@ def pick_station_B(options, picked, workout_attributes):
 
 
 def scale_A(options, movement):
-
     for elt in options:
         pick = True
         if elt[0] == movement[0]:
@@ -122,6 +121,7 @@ def scale_A(options, movement):
             if pick:
                 # print('adding movement A')
                 return elt
+    return movement
 
 
 def scale_C(options, movement, scale_a_first):
@@ -145,14 +145,22 @@ def scale_C(options, movement, scale_a_first):
             if pick:
                 # print('adding movement C')
                 return elt
+    return movement
 
 
 def scale(options, picked):
     new_list = []
+    # print(picked)
+    # print("scaling options")
     scale_a_first = scale_A(options, picked[0])
+    # print(scale_a_first)
     scale_c_first = scale_C(options, picked[0], scale_a_first)
+    # print(scale_c_first)
     scale_a_second = scale_A(options, picked[1])
+    # print(scale_a_second)
     scale_c_second = scale_C(options, picked[1], scale_a_second)
+    # print(scale_c_second)
+    # print('\n\n')
 
     # options.remove(scale_a_first)
     # options.remove(scale_c_first)
@@ -239,6 +247,7 @@ def get_workouts():
     for elt in abs_options:
         if len(abs) > 1:
             break
+
         if ("left" in elt[0] or "right" in elt[0]) and len(abs) < 1:
             string = ""
             if "left" in elt[0]:
@@ -252,6 +261,20 @@ def get_workouts():
                     add_movement(abs, workout_attributes, e2)
         else:
             add_movement(abs, workout_attributes, elt)
+
+    # if should_print:
+    #     print('Here is your workout!\n\n')
+    #     print(one)
+    #     print('\n')
+    #     print(two)
+    #     print('\n')
+    #     print(three)
+    #     print('\n')
+    #     print(four)
+    #     print('\n')
+    #     print(five)
+    #     print('\n')
+    #     print(abs)
 
     # SCALING
     # one = scale(one_options, one)
@@ -287,18 +310,10 @@ def get_workouts():
 
 # order of the workout is A/B/C for station 1 exercise 1, then exercise 2, then station 2, etc. all the way around the gym
 
-# print('Here is your workout!\n\n')
-# print(one)
-# print('\n')
-# print(two)
-# print('\n')
-# print(three)
-# print('\n')
-# print(four)
-# print('\n')
-# print(five)
-# print('\n')
-# print(abs)
+
+if __name__ == "__main__":
+    should_print = True
+    get_workouts()
 
 # have to still pick scaling options
 
