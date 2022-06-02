@@ -35,6 +35,11 @@ def fill_cell(row, col_idx, content, overwrite=False):
         row[col_idx] = content
 
 
+def clear_row(row):
+    for i in range(0, 6):
+        row[i] = ""
+
+
 with open('Data_in.csv') as in_csv:
     with open('data_out.csv', 'w') as out_csv:
         writer = csv.writer(out_csv, delimiter=',', quotechar='|')
@@ -198,6 +203,12 @@ with open('Data_in.csv') as in_csv:
                 fill_cell(row, 7, "BW")
             if row[2] == "abs":
                 fill_cell(row, 6, random.choice(abs_stations), overwrite=True)
+            if "versa" in obj:
+                clear_row(row)
+            if "stability" in obj:
+                clear_row(row)
+            if "sandbell" in obj:
+                clear_row(row)
 
             writer.writerow(row)
             data.append(row)
