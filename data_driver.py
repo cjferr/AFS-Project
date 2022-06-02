@@ -151,9 +151,6 @@ with open('Data_in.csv') as in_csv:
             if "band" in obj:
                 fill_cell(row, 7, "band")
                 fill_cell(row, 6, 4)
-            if "stability ball" in obj:
-                append_to_cell(row, 7, "stability ball")
-                fill_cell(row, 6, 1)
             if "bridge" in obj:
                 fill_cell(row, 2, "lower push")
                 fill_cell(row, 3, "strength")
@@ -174,9 +171,6 @@ with open('Data_in.csv') as in_csv:
                 fill_cell(row, 3, "strength")
                 fill_cell(row, 4, "low impact")
                 fill_cell(row, 5, "posterior")
-            if "versa" in obj:
-                append_to_cell(row, 7, "versabag")
-                fill_cell(row, 6, 4)
             if "ladder" in obj:
                 fill_cell(row, 6, 4)
                 append_to_cell(row, 7, "ladder")
@@ -199,9 +193,6 @@ with open('Data_in.csv') as in_csv:
                     fill_cell(row, 3, "strength")
                     fill_cell(row, 4, "low impact")
                     fill_cell(row, 5, "posterior")
-            if "sandbell" in obj:
-                fill_cell(row, 7, "sandbell")
-                fill_cell(row, 6, 4)
             if row[7] == "":  # need to find a way where I can make sure things that are L and R are grouped together; maybe delete the right options and if it picks left than just tell them to make it alternating?
                 fill_cell(row, 6, random.choice(bw_stations))
                 fill_cell(row, 7, "BW")
