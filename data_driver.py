@@ -205,7 +205,7 @@ with open('Data_in.csv') as in_csv:
                 fill_cell(row, 6, random.choice(abs_stations), overwrite=True)
             if "versa" in obj:
                 clear_row(row)
-            if "stability" in obj:
+            if "pose" in obj:
                 clear_row(row)
             if "sandbell" in obj:
                 clear_row(row)

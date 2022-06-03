@@ -14,6 +14,8 @@ import random
 
 # Function to check that the row is completely filled out
 
+# SOLUTION TO ONE ELT PER STATION: store it as a variable, and when checking for the other movements check to see that they match that equipment
+
 
 def print_list(list):
     for elt in list:
@@ -57,41 +59,37 @@ def pick_first(options, picked, workout_attributes):
 
 def pick_second(options, picked, workout_attributes, movement1):
     # bug here: picking the same movement twice if left or right is in the name, but not picking the opposite side for it.
-    if "left" in movement1[0] or "right" in movement1[0]:
-        string = ""
-        if "left" in movement1[0]:
-            string = "left"
-        else:
-            string = "right"
-
-        text = movement1[0].replace(string, '')
-        for e2 in options:
-            if text in e2[0]:
-                add_movement(picked, workout_attributes, e2)
+    if "left" in movement1[0]:
+        elt = movement1[0]
+        elt = elt.replace("left", "right")
+        add_movement(picked, workout_attributes, elt)
+    elif "right" in movement1[0]:
+        elt = movement1[0]
+        elt = elt.replace("right", "left")
+        add_movement(picked, workout_attributes, elt)
+    else:
+        for elt in options:
+            if len(picked) > 1:
                 return
-
-    for elt in options:
-        if len(picked) > 1:
-            return
-        elif movement1[2] == elt[2]:
-            pass
-        elif movement1[3] == 'cardio' and elt[3] == 'cardio':
-            pass
-        elif movement1[4] == 'high impact' and elt[4] == 'high impact':
-            pass
-        else:
-            if elt[4] == 'high impact' and workout_attributes[elt[4]] > 3:
+            elif movement1[2] == elt[2]:
                 pass
-            elif workout_attributes[elt[2]] > 5:
+            elif movement1[3] == 'cardio' and elt[3] == 'cardio':
                 pass
-            elif workout_attributes[elt[3]] > 9 and elt[3] == 'strength':
-                pass
-            elif workout_attributes[elt[5]] > 8 and elt[5] == 'anterior':
-                pass
-            elif "left" in elt or "right" in elt:
+            elif movement1[4] == 'high impact' and elt[4] == 'high impact':
                 pass
             else:
-                add_movement(picked, workout_attributes, elt)
+                if elt[4] == 'high impact' and workout_attributes[elt[4]] > 3:
+                    pass
+                elif workout_attributes[elt[2]] > 5:
+                    pass
+                elif workout_attributes[elt[3]] > 9 and elt[3] == 'strength':
+                    pass
+                elif workout_attributes[elt[5]] > 8 and elt[5] == 'anterior':
+                    pass
+                elif "left" in elt or "right" in elt:
+                    pass
+                else:
+                    add_movement(picked, workout_attributes, elt)
 
 
 def pick_station_B(options, picked, workout_attributes):
@@ -100,7 +98,7 @@ def pick_station_B(options, picked, workout_attributes):
 
     # print(picked)
 
-
+# DO need to fix scaling so that movements do not go awry with too much equipment
 def scale_A(options, movement):
     for elt in options:
         pick = True
